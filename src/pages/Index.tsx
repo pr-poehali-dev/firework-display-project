@@ -16,6 +16,7 @@ const Index = () => {
   const [date, setDate] = useState<Date>();
   const [selectedService, setSelectedService] = useState('');
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const services = [
     {
@@ -110,6 +111,14 @@ const Index = () => {
               <a href="#gallery" className="text-silver hover:text-gold transition-colors">Галерея</a>
               <a href="#contacts" className="text-silver hover:text-gold transition-colors">Контакты</a>
             </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden text-gold"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={28} />
+            </Button>
             <Dialog open={isBookingOpen} onOpenChange={setIsBookingOpen}>
               <DialogTrigger asChild>
                 <Button className="bg-gold text-dark-navy hover:bg-gold/90 glow-gold">
@@ -182,6 +191,64 @@ const Index = () => {
           </div>
         </div>
       </nav>
+
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-background/95 backdrop-blur-lg md:hidden">
+          <div className="flex flex-col items-center justify-center h-full space-y-8">
+            <a
+              href="#home"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-3xl font-bold text-silver hover:text-gold transition-colors"
+            >
+              Главная
+            </a>
+            <a
+              href="#services"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-3xl font-bold text-silver hover:text-gold transition-colors"
+            >
+              Услуги
+            </a>
+            <a
+              href="#portfolio"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-3xl font-bold text-silver hover:text-gold transition-colors"
+            >
+              Портфолио
+            </a>
+            <a
+              href="#reviews"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-3xl font-bold text-silver hover:text-gold transition-colors"
+            >
+              Отзывы
+            </a>
+            <a
+              href="#gallery"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-3xl font-bold text-silver hover:text-gold transition-colors"
+            >
+              Галерея
+            </a>
+            <a
+              href="#contacts"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-3xl font-bold text-silver hover:text-gold transition-colors"
+            >
+              Контакты
+            </a>
+            <Button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                setIsBookingOpen(true);
+              }}
+              className="bg-gold text-dark-navy hover:bg-gold/90 text-xl px-8 py-6 glow-gold"
+            >
+              Забронировать
+            </Button>
+          </div>
+        </div>
+      )}
 
       <section id="home" className="pt-32 pb-20 px-6">
         <div className="container mx-auto text-center">
